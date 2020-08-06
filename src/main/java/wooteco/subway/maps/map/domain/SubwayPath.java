@@ -47,7 +47,7 @@ public class SubwayPath {
         return lineStationEdges.stream().mapToInt(it -> it.getLineStation().getDistance()).sum();
     }
 
-    public int calculateTotalFare() {
+    public int calculateFare() {
         int overDistanceFare = calculateOverFare(calculateDistance() - DEFAULT_DISTANCE);
         int maximumExtraFare = lineStationEdges.stream()
             .mapToInt(it -> it.getLineStation().getExtraFare()).max()
