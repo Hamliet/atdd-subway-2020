@@ -3,6 +3,8 @@ package wooteco.subway.maps.map.domain;
 import com.google.common.collect.Lists;
 import java.util.List;
 import java.util.stream.Collectors;
+import wooteco.security.core.context.SecurityContextHolder;
+import wooteco.subway.members.member.domain.LoginMember;
 
 public class SubwayPath {
 
@@ -36,16 +38,17 @@ public class SubwayPath {
 
     public int calculateTotalFare() {
         int totalDistance = calculateDistance();
-
         int defaultDistanceFare = 1250;
         int overDistanceFare = calculateOverFare(totalDistance - 10);
         int maximumExtraFare = lineStationEdges.stream()
             .mapToInt(it -> it.getLineStation().getExtraFare()).max()
             .orElseThrow(() -> new IllegalArgumentException("extraFare가 설정되지 않았습니다."));
+        LoginMember loginMember = (LoginMember) SecurityContextHolder.getContext()
+            .getAuthentication().getPrincipal();
 
-        return defaultDistanceFare
-            + overDistanceFare
-            + maximumExtraFare;
+        double discountRate = calculateDiscountRate(loginMember.getAge());
+
+        return (int) ((defaultDistanceFare + overDistanceFare + maximumExtraFare) * discountRate);
     }
 
     private int calculateOverFare(int distance) {
@@ -56,5 +59,15 @@ public class SubwayPath {
             return (int) ((Math.ceil((distance - 1) / 5) + 1) * 100);
         }
         return (int) ((Math.ceil((distance - 40 - 1) / 8) + 1) * 100) + calculateOverFare(40);
+    }
+
+    private double calculateDiscountRate(Integer age) {
+        if (6 <= age && age < 13) {
+            return 0.5;
+        }
+        if (13 <= age && age < 19) {
+            return 0.2;
+        }
+        return 1;
     }
 }
