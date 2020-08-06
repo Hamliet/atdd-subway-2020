@@ -59,7 +59,8 @@ class SubwayPathTest {
         Member member = createMember(EMAIL, PASSWORD, 10);
         setAuthentication(member);
 
-        // 어린이, 노선 추가 요금 500, 이용 거리 15km 추가
-        assertThat(subwayPath.calculateTotalFare()).isEqualTo(1025);
+        // 어린이, 노선 추가 요금 500, 이용 거리 15km 추가일 경우
+        // (기본 운임 1250 + 추가 이용 금액 300 + 노선 추가 요금 500 + 어린이 할인 금액 350) * 어린이 할인 비율 0.5
+        assertThat(subwayPath.calculateTotalFare()).isEqualTo(850);
     }
 }
