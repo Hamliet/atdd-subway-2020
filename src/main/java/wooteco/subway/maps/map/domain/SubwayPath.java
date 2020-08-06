@@ -45,10 +45,9 @@ public class SubwayPath {
             .orElseThrow(() -> new IllegalArgumentException("extraFare가 설정되지 않았습니다."));
         LoginMember loginMember = (LoginMember) SecurityContextHolder.getContext()
             .getAuthentication().getPrincipal();
+        int notDiscountedFare = (defaultDistanceFare + overDistanceFare + maximumExtraFare);
 
-        double discountRate = calculateDiscountRate(loginMember.getAge());
-
-        return (int) ((defaultDistanceFare + overDistanceFare + maximumExtraFare) * discountRate);
+        return (int) calculateDiscountedFare(notDiscountedFare, loginMember.getAge());
     }
 
     private int calculateOverFare(int distance) {
@@ -61,12 +60,12 @@ public class SubwayPath {
         return (int) ((Math.ceil((distance - 40 - 1) / 8) + 1) * 100) + calculateOverFare(40);
     }
 
-    private double calculateDiscountRate(Integer age) {
+    private double calculateDiscountedFare(Integer notDiscountedFare, Integer age) {
         if (6 <= age && age < 13) {
-            return 0.5;
+            return (notDiscountedFare - 350) * 0.5;
         }
         if (13 <= age && age < 19) {
-            return 0.2;
+            return (notDiscountedFare - 350) * 0.2;
         }
         return 1;
     }
