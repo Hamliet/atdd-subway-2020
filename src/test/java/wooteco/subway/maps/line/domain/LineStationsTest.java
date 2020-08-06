@@ -18,16 +18,16 @@ public class LineStationsTest {
     void setUp() {
         // given
         lineStations = new LineStations();
-        lineStations.add(new LineStation(1L, null, 0, 0));
-        lineStations.add(new LineStation(2L, 1L, 10, 4));
-        lineStations.add(new LineStation(3L, 2L, 10, 5));
+        lineStations.add(new LineStation(1L, null, 0, 0, 100));
+        lineStations.add(new LineStation(2L, 1L, 10, 4, 100));
+        lineStations.add(new LineStation(3L, 2L, 10, 5, 100));
     }
 
     @DisplayName("지하철 노선에 역을 마지막에 등록한다.")
     @Test
     void add1() {
         // when
-        lineStations.add(new LineStation(4L, 3L, 10, 10));
+        lineStations.add(new LineStation(4L, 3L, 10, 10, 100));
 
         // then
         List<Long> stationIds = lineStations.getStationsInOrder().stream()
@@ -40,7 +40,7 @@ public class LineStationsTest {
     @Test
     void add2() {
         // when
-        lineStations.add(new LineStation(4L, 1L, 10, 10));
+        lineStations.add(new LineStation(4L, 1L, 10, 10, 100));
 
         // then
         List<Long> stationIds = lineStations.getStationsInOrder().stream()
@@ -53,7 +53,7 @@ public class LineStationsTest {
     @Test
     void add3() {
         // when
-        assertThatThrownBy(() -> lineStations.add(new LineStation(2L, 1L, 10, 10)))
+        assertThatThrownBy(() -> lineStations.add(new LineStation(2L, 1L, 10, 10, 100)))
                 .isInstanceOf(RuntimeException.class);
     }
 

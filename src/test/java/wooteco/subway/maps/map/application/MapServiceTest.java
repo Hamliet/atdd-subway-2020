@@ -50,18 +50,18 @@ public class MapServiceTest {
         stations.put(4L, TestObjectUtils.createStation(4L, "남부터미널역"));
 
         Line line1 = TestObjectUtils.createLine(1L, "2호선", "GREEN");
-        line1.addLineStation(new LineStation(1L, null, 0, 0));
-        LineStation lineStation2 = new LineStation(2L, 1L, 2, 2);
-        line1.addLineStation(new LineStation(2L, 1L, 2, 2));
+        line1.addLineStation(new LineStation(1L, null, 0, 0, 100));
+        LineStation lineStation2 = new LineStation(2L, 1L, 2, 2, 100);
+        line1.addLineStation(new LineStation(2L, 1L, 2, 2, 100));
 
         Line line2 = TestObjectUtils.createLine(2L, "신분당선", "RED");
-        line2.addLineStation(new LineStation(2L, null, 0, 0));
-        line2.addLineStation(new LineStation(3L, 2L, 2, 1));
+        line2.addLineStation(new LineStation(2L, null, 0, 0, 100));
+        line2.addLineStation(new LineStation(3L, 2L, 2, 1, 100));
 
         Line line3 = TestObjectUtils.createLine(3L, "3호선", "ORANGE");
-        line3.addLineStation(new LineStation(1L, null, 0, 0));
-        LineStation lineStation6 = new LineStation(4L, 1L, 1, 2);
-        LineStation lineStation7 = new LineStation(3L, 4L, 2, 2);
+        line3.addLineStation(new LineStation(1L, null, 0, 0, 100));
+        LineStation lineStation6 = new LineStation(4L, 1L, 1, 2, 100);
+        LineStation lineStation7 = new LineStation(3L, 4L, 2, 2, 100);
         line3.addLineStation(lineStation6);
         line3.addLineStation(lineStation7);
 

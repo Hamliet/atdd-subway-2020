@@ -14,15 +14,17 @@ public class LineStation {
     private Long preStationId;
     private Integer distance;
     private Integer duration;
+    private Integer extraFare;
 
     public LineStation() {
     }
 
-    public LineStation(Long stationId, Long preStationId, Integer distance, Integer duration) {
+    public LineStation(Long stationId, Long preStationId, Integer distance, Integer duration, Integer extraFare) {
         this.stationId = stationId;
         this.preStationId = preStationId;
         this.distance = distance;
         this.duration = duration;
+        this.extraFare = extraFare;
     }
 
     public boolean isSame(LineStation newLineStation) {
@@ -43,6 +45,10 @@ public class LineStation {
 
     public Integer getDuration() {
         return duration;
+    }
+
+    public int getExtraFare() {
+        return extraFare;
     }
 
     public void updatePreStationTo(Long newPreStationId) {

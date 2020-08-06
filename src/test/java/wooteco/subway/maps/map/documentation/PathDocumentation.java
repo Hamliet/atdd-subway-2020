@@ -52,7 +52,7 @@ public class PathDocumentation extends Documentation {
             Arrays.asList(
                 new StationResponse(1L, "강남역", null, null),
                 new StationResponse(2L, "역삼역", null, null)
-            ), 1, 2);
+            ), 1, 2, 1550);
 
         when(mapService.findPath(any(), any(), any())).thenReturn(pathResponse);
 

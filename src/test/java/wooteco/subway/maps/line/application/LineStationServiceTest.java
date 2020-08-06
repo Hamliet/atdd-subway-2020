@@ -80,8 +80,8 @@ public class LineStationServiceTest {
     void removeLineStation() {
         // given
         Line line = TestObjectUtils.createLine(1L, "신분당선", "RED");
-        line.addLineStation(new LineStation(1L, null, 10, 10));
-        line.addLineStation(new LineStation(2L, 1L, 10, 10));
+        line.addLineStation(new LineStation(1L, null, 10, 10, 100));
+        line.addLineStation(new LineStation(2L, 1L, 10, 10, 100));
         when(lineService.findLineById(anyLong())).thenReturn(line);
 
         // when

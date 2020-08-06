@@ -14,8 +14,10 @@ public class PathResponseAssembler {
                 .map(it -> StationResponse.of(stations.get(it)))
                 .collect(Collectors.toList());
 
+        int duration = subwayPath.calculateDuration();
         int distance = subwayPath.calculateDistance();
+        int totalFare = subwayPath.calculateTotalFare();
 
-        return new PathResponse(stationResponses, subwayPath.calculateDuration(), distance);
+        return new PathResponse(stationResponses, duration, distance, totalFare);
     }
 }
