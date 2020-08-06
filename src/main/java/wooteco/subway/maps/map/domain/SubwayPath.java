@@ -53,8 +53,13 @@ public class SubwayPath {
             .mapToInt(it -> it.getLineStation().getExtraFare()).max()
             .orElseThrow(() -> new IllegalArgumentException("extraFare가 설정되지 않았습니다."));
 
-        LoginMember loginMember = (LoginMember) SecurityContextHolder.getContext()
-            .getAuthentication().getPrincipal();
+        LoginMember loginMember;
+        try {
+            loginMember = (LoginMember) SecurityContextHolder.getContext()
+                .getAuthentication().getPrincipal();
+        } catch (NullPointerException e) {
+            loginMember = new LoginMember(null, "", "", 20);
+        }
         int notDiscountedFare = (DEFAULT_DISTANCE_FARE + overDistanceFare + maximumExtraFare);
 
         return calculateDiscountedFare(notDiscountedFare, loginMember.getAge());

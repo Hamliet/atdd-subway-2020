@@ -23,7 +23,7 @@ class SubwayPathTest {
 
     private static final String EMAIL = "email@email.com";
     private static final String PASSWORD = "password";
-    private static final Integer AGE = 20;
+    private static final Integer AGE = 10;
 
     @Autowired
     MemberRepository memberRepository;
@@ -56,7 +56,7 @@ class SubwayPathTest {
             new LineStationEdge(new LineStation(3L, 2L, 15, 1, 500), 1L)
         );
         SubwayPath subwayPath = new SubwayPath(lineStationEdges);
-        Member member = createMember(EMAIL, PASSWORD, 10);
+        Member member = createMember(EMAIL, PASSWORD, AGE);
         setAuthentication(member);
 
         // 어린이, 노선 추가 요금 500, 이용 거리 15km 추가일 경우
